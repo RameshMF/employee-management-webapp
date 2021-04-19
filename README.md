@@ -12,6 +12,7 @@ Employee Management System using Spring Boot, Spring Security, Thymeleaf and MyS
 <li><a href="https://youtu.be/yoZpl-iBzs4" target="_blank">Spring Boot Thymeleaf CRUD Database Real-Time Project - PART 6 </a></li>
 <li><a href="https://youtu.be/dMT6K3sxCkg" target="_blank">Spring Boot Thymeleaf CRUD Database Real-Time Project - PART 7 </a></li>
 </ul>
+
 ## Registration and Login Module
 <ul>
 <li><a href="https://youtu.be/Hk70e7KR290" target="_blank">Registration and Login with Spring Boot and Spring Security - PART 1 </a></li>
