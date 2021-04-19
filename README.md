@@ -1,5 +1,4 @@
-# employee-management-webapp
-Employee Management System using Spring Boot, Spring Security, Thymeleaf and MySQL database.
+# Employee Management System using Spring Boot, Spring Security, Thymeleaf and MySQL database.
 
 # YouTube Video Series
 ## Employee Management Module
