@@ -23,7 +23,11 @@ public class Employee {
 	
 	@Column(name = "email")
 	private String email;
-	public long getId() {
+
+        @Column(name = "phone")
+	private String phone;
+
+        public long getId() {
 		return id;
 	}
 	public void setId(long id) {
@@ -47,4 +51,13 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+        
 }
