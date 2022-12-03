@@ -19,11 +19,11 @@
 			<!-- Add hidden form field to handle update -->
 			<input type="hidden" th:field="*{id}" />
 			
-			<input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{firstName}" placeholder="Employee First Name" class="form-control mb-4 col-4">
 				
-				<input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+				<input type="text" th:field="*{lastName}" placeholder="Employee Last Name" class="form-control mb-4 col-4">
 				
-				<input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+				<input type="text" th:field="*{email}" placeholder="Employee EMail" class="form-control mb-4 col-4">
 				
 				<button type="submit" class="btn btn-info col-2"> Update Employee</button>
 		</form>

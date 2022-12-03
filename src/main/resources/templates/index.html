@@ -27,6 +27,7 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/departments}">Departments</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
 				</ul>
 			</div>

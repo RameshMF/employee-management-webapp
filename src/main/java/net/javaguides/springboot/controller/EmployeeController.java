@@ -2,6 +2,8 @@ package net.javaguides.springboot.controller;
 
 import java.util.List;
 
+import net.javaguides.springboot.model.Department;
+import net.javaguides.springboot.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -20,13 +22,58 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-	
+
+	@Autowired
+	private DepartmentService departmentService;
+
 	// display list of employees
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
 	}
-	
+
+	@GetMapping("/departments")
+	public String departments(Model model) {
+//		// create model attribute to bind form data
+//		Department departments = new Department();
+//		model.addAttribute("departments", departments);
+		return findPaginatedDepartments(1,"departmentName", "asc", model);
+	}
+
+	@GetMapping("/showNewDepartmentForm")
+	public String showNewDepartmentForm(Model model) {
+		// create model attribute to bind form data
+		Department department = new Department();
+		model.addAttribute("department", department);
+		return "new_department";
+	}
+
+	@PostMapping("/saveDepartment")
+	public String saveDepartment(@ModelAttribute("department") Department department) {
+		// save employee to database
+ 		departmentService.saveDepartment(department);
+		return "redirect:/departments";
+	}
+
+	@GetMapping("/showFormForUpdateDepartment/{id}")
+	public String showFormForUpdateDepartment(@PathVariable ( value = "id") long id, Model model) {
+
+		// get employee from the service
+		Department department = departmentService.getDepartmentById(id);
+
+		// set employee as a model attribute to pre-populate the form
+		model.addAttribute("department", department);
+		return "update_department";
+	}
+
+	@GetMapping("/deleteDepartment/{id}")
+	public String deleteDepartment(@PathVariable (value = "id") long id) {
+
+		// call delete employee method
+		this.departmentService.deleteDepartmentById(id);
+		return "redirect:/departments";
+	}
+
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
 		// create model attribute to bind form data
@@ -82,5 +129,27 @@ public class EmployeeController {
 		
 		model.addAttribute("listEmployees", listEmployees);
 		return "index";
+	}
+
+	@GetMapping("/departments/page/{pageNo}")
+	public String findPaginatedDepartments(@PathVariable (value = "pageNo") int pageNo,
+								@RequestParam("sortField") String sortField,
+								@RequestParam("sortDir") String sortDir,
+								Model model) {
+		int pageSize = 5;
+
+		Page<Department> page = departmentService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Department> listDepartments = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listDepartments", listDepartments);
+		return "departments";
 	}
 }
