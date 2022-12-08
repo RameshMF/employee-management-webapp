@@ -24,8 +24,23 @@
 				
 				<input type="text" th:field="*{email}"
 				placeholder="Employee Email" class="form-control mb-4 col-4">
-				
-				<button type="submit" class="btn btn-info col-2"> Save Employee</button>
+
+			<tr  th:each="employee : ${listemployee}">
+				<td th:text="${employee.id}">Employee ID</td>
+				<td th:text="${employee.ename}">Employee Name</td>
+				<td th:text="${employee.mobile}">Mobile</td>
+				<td th:text="${employee.salary}">Salary</td>
+				<td>
+					<a th:href="@{'/edit/' + ${employee.id}}">Edit</a>
+				</td>
+
+				<!--
+                                <input type="text" th:field="*{}"
+                                   placeholder="Employee Email" class="form-control mb-4 col-4">
+                -->
+
+
+			<button type="submit" class="btn btn-info col-2"> Save Employee</button>
 		</form>
 		
 		<hr>

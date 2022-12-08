@@ -1,18 +1,12 @@
 package net.javaguides.springboot.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
-	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name = "first_name")
@@ -23,6 +17,11 @@ public class Employee {
 	
 	@Column(name = "email")
 	private String email;
+
+	@ManyToOne (cascade=CascadeType.ALL)
+	@JoinColumn(name="working_position")
+	private WorkingPosition workingPosition;
+
 	public long getId() {
 		return id;
 	}
@@ -47,4 +46,8 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public WorkingPosition getWorkingPosition() { return workingPosition; }
+
+	public void setWorkingPosition(WorkingPosition workingPosition) { this.workingPosition =  workingPosition; }
 }
