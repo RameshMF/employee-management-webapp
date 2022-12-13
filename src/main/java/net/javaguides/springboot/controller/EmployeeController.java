@@ -76,10 +76,12 @@ public class EmployeeController {
 
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
+		List<Department> departments = this.departmentService.getAllDepartments();
 		// create model attribute to bind form data
 		Employee employee = new Employee();
 
 		model.addAttribute("employee", employee);
+		model.addAttribute("departments", departments);
 		return "new_employee";
 	}
 	
@@ -108,8 +110,7 @@ public class EmployeeController {
 		this.employeeService.deleteEmployeeById(id);
 		return "redirect:/";
 	}
-	
-	
+
 	@GetMapping("/page/{pageNo}")
 	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
 			@RequestParam("sortField") String sortField,

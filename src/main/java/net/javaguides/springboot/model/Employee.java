@@ -18,9 +18,13 @@ public class Employee {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToOne (cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="working_position")
 	private WorkingPosition workingPosition;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="department")
+	private Department department;
 
 	public long getId() {
 		return id;
@@ -49,5 +53,9 @@ public class Employee {
 
 	public WorkingPosition getWorkingPosition() { return workingPosition; }
 
-	public void setWorkingPosition(WorkingPosition workingPosition) { this.workingPosition =  workingPosition; }
+	public void setWorkingPosition(WorkingPosition workingPosition) { this.workingPosition = workingPosition; }
+
+	public Department getDepartment() { return department; }
+
+	public void setDepartment(Department department) { this.department = department; }
 }

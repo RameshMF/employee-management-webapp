@@ -19,20 +19,29 @@
 			<input type="text" th:field="*{firstName}"
 				placeholder="Employee First Name" class="form-control mb-4 col-4">
 				
-				<input type="text" th:field="*{lastName}"
+			<input type="text" th:field="*{lastName}"
 				placeholder="Employee Last Name" class="form-control mb-4 col-4">
 				
-				<input type="text" th:field="*{email}"
+			<input type="text" th:field="*{email}"
 				placeholder="Employee Email" class="form-control mb-4 col-4">
 
-			<tr  th:each="employee : ${listemployee}">
+			<p>Select department:</p>
+			<select name="EmployeesDepartments" id="EmployeesDepartments" class="form-control mb-4 col-4" th:field="*{department}">
+				<option th:each="department : ${departments}"
+						th:value="${department.id}"
+						th:text="${department.departmentName}">
+				</option>
+			</select>
+
+
+			<!--<tr  th:each="employee : ${listemployee}">
 				<td th:text="${employee.id}">Employee ID</td>
 				<td th:text="${employee.ename}">Employee Name</td>
 				<td th:text="${employee.mobile}">Mobile</td>
 				<td th:text="${employee.salary}">Salary</td>
 				<td>
 					<a th:href="@{'/edit/' + ${employee.id}}">Edit</a>
-				</td>
+				</td>-->
 
 				<!--
                                 <input type="text" th:field="*{}"
