@@ -3,7 +3,9 @@ package net.javaguides.springboot.controller;
 import java.util.List;
 
 import net.javaguides.springboot.model.Department;
+import net.javaguides.springboot.model.WorkingPosition;
 import net.javaguides.springboot.service.DepartmentService;
+import net.javaguides.springboot.service.WorkingPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -26,12 +28,18 @@ public class EmployeeController {
 	@Autowired
 	private DepartmentService departmentService;
 
+	@Autowired
+	private WorkingPositionService workingPositionService;
+
 	// display list of employees
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
 	}
 
+
+
+	// departments
 	@GetMapping("/departments")
 	public String departments(Model model) {
 //		// create model attribute to bind form data
@@ -74,6 +82,7 @@ public class EmployeeController {
 		return "redirect:/departments";
 	}
 
+	// employees
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
 		List<Department> departments = this.departmentService.getAllDepartments();
