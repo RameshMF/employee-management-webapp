@@ -12,19 +12,19 @@
 	<div class="container">
 		<h1>Employee Management System</h1>
 		<hr>
-		<h2>Save Department</h2>
+		<h2>Save Working Position</h2>
 
-		<form action="#" th:action="@{/saveDepartment}" th:object="${department}"
+		<form action="#" th:action="@{/saveWorkingPosition}" th:object="${workingPosition}"
 			method="POST">
 			<input type="text" th:field="*{positionName}"
-				placeholder="Department Name" class="form-control mb-2 col-2">
+				placeholder="Working Position Name" class="form-control mb-2 col-2">
 
-				<button type="submit" class="btn btn-info col-2"> Save Department</button>
+				<button type="submit" class="btn btn-info col-2"> Save Working Position</button>
 		</form>
 		
 		<hr>
 		
-		<a th:href = "@{/departments}"> Back to Departments List</a>
+		<a th:href = "@{/workingPositions}"> Back to Working Positions List</a>
 	</div>
 </body>
 </html>

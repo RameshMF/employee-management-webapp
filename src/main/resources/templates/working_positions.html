@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Departments</title>
+    <title>Working positions</title>
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <!-- create navigation bar (header) -->
+    <!-- create navigation bar ( header) -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -39,25 +39,25 @@
     <br>
 
     <div class="container my-2">
-        <h1>Departments List</h1>
+        <h1>Working positions list</h1>
 
-        <a th:href = "@{/showNewDepartmentForm}" class="btn btn-primary btn-sm mb-3"> Add New Department </a>
+        <a th:href = "@{/showNewWorkingPositionForm}" class="btn btn-primary btn-sm mb-3"> Add New Position </a>
 
         <table border="1" class = "table table-striped table-responsive-md">
             <thead>
             <tr>
                 <th>
-                    <a th:href="@{'/departments/page/' + ${currentPage} + '?sortField=departmentName&sortDir=' + ${reverseSortDir}}">
-                        Department Name</a>
+                    <a th:href="@{'/workingPositions/page/' + ${currentPage} + '?sortField=positionName&sortDir=' + ${reverseSortDir}}">
+                        Position Name</a>
                 </th>
                 <th> Actions </th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="department : ${listDepartments}">
-                <td th:text="${department.departmentName}"></td>
-                <td> <a th:href="@{/showFormForUpdateDepartment/{id}(id=${department.id})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/deleteDepartment/{id}(id=${department.id})}" class="btn btn-danger">Delete</a>
+            <tr th:each="position : ${listWorkingPositions}">
+                <td th:text="${position.positionName}"></td>
+                <td> <a th:href="@{/showFormForUpdateWorkingPosition/{id}(id=${position.id})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/deleteWorkingPosition/{id}(id=${position.id})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -70,14 +70,14 @@
                 </div>
                 <div class = "col">
 						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-							<a th:if="${currentPage != i}" th:href="@{'/departments/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+							<a th:if="${currentPage != i}" th:href="@{'/workingPositions/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 							<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 						</span>
 
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/departments/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/workingPositions/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
                         <span th:unless="${currentPage < totalPages}">Next</span>
 
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/departments/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/workingPositions/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
                         <span th:unless="${currentPage < totalPages}">Last</span>
                 </div>
             </div>

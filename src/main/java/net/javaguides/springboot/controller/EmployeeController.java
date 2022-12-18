@@ -31,20 +31,57 @@ public class EmployeeController {
 	@Autowired
 	private WorkingPositionService workingPositionService;
 
-	// display list of employees
+	// display list of all  employees
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
 	}
 
 
+	// working positions
+	@GetMapping("/workingPositions")
+	public String workingPositions(Model model) {
+		return findPaginatedWorkingPostions(1,"positionName", "asc", model);
+	}
+
+	@GetMapping("/showNewWorkingPositionForm")
+	public String showNewWorkingPositionForm(Model model) {
+		// create model attribute to bind form data
+		WorkingPosition workingPosition = new WorkingPosition();
+		model.addAttribute("workingPosition", workingPosition);
+		return "new_working_position";
+	}
+
+	@PostMapping("/saveWorkingPosition")
+	public String saveWorkingPosition(@ModelAttribute("workingPosition") WorkingPosition workingPosition) {
+		// save working position to database
+		workingPositionService.saveWorkingPosition(workingPosition);
+		return "redirect:/workingPositions";
+	}
+
+	@GetMapping("/showFormForUpdateWorkingPosition/{id}")
+	public String showFormForUpdateWorkingPosition(@PathVariable ( value = "id") long id, Model model) {
+
+		// get working position from the service
+		WorkingPosition workingPosition = workingPositionService.getWorkingPositionById(id);
+
+		// set employee as a model attribute to pre-populate the form
+		model.addAttribute("workingPosition", workingPosition);
+		return "update_working_position";
+	}
+
+	@GetMapping("/deleteWorkingPosition/{id}")
+	public String deleteWorkingPosition(@PathVariable (value = "id") long id) {
+
+		// call delete working position method
+		this.workingPositionService.deleteWorkingPositionById(id);
+		return "redirect:/workingPositions";
+	}
+
 
 	// departments
 	@GetMapping("/departments")
 	public String departments(Model model) {
-//		// create model attribute to bind form data
-//		Department departments = new Department();
-//		model.addAttribute("departments", departments);
 		return findPaginatedDepartments(1,"departmentName", "asc", model);
 	}
 
@@ -58,7 +95,7 @@ public class EmployeeController {
 
 	@PostMapping("/saveDepartment")
 	public String saveDepartment(@ModelAttribute("department") Department department) {
-		// save employee to database
+		// save department to database
  		departmentService.saveDepartment(department);
 		return "redirect:/departments";
 	}
@@ -66,10 +103,10 @@ public class EmployeeController {
 	@GetMapping("/showFormForUpdateDepartment/{id}")
 	public String showFormForUpdateDepartment(@PathVariable ( value = "id") long id, Model model) {
 
-		// get employee from the service
+		// get department from the service
 		Department department = departmentService.getDepartmentById(id);
 
-		// set employee as a model attribute to pre-populate the form
+		// set department as a model attribute to pre-populate the form
 		model.addAttribute("department", department);
 		return "update_department";
 	}
@@ -77,7 +114,7 @@ public class EmployeeController {
 	@GetMapping("/deleteDepartment/{id}")
 	public String deleteDepartment(@PathVariable (value = "id") long id) {
 
-		// call delete employee method
+		// call delete department method
 		this.departmentService.deleteDepartmentById(id);
 		return "redirect:/departments";
 	}
@@ -162,5 +199,27 @@ public class EmployeeController {
 
 		model.addAttribute("listDepartments", listDepartments);
 		return "departments";
+	}
+
+	@GetMapping("/workingPositions/page/{pageNo}")
+	public String findPaginatedWorkingPostions(@PathVariable (value = "pageNo") int pageNo,
+										   @RequestParam("sortField") String sortField,
+										   @RequestParam("sortDir") String sortDir,
+										   Model model) {
+		int pageSize = 5;
+
+		Page<WorkingPosition> page = workingPositionService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<WorkingPosition> listWorkingPositions = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listWorkingPositions", listWorkingPositions);
+		return "working_positions";
 	}
 }

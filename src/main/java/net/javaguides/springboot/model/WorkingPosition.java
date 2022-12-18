@@ -13,19 +13,7 @@ public class WorkingPosition {
 
     @Column(name = "position")
     private String positionName;
-
-    @OneToMany(targetEntity=Employee.class, mappedBy="workingPosition")
-    @OrderBy("firstName ASC")
-    private Set<Employee> employees = new HashSet<Employee>();
-
-/*    public Set<Employee> getPersons() {
-        return employees;
-    }
-
-    public void setPersons(Set<Employee> persons) {
-        this.employees = persons;
-    }*/
-
+    
     public long getId() {
         return id;
     }
