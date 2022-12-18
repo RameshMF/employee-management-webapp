@@ -41,7 +41,7 @@ public class EmployeeController {
 	// working positions
 	@GetMapping("/workingPositions")
 	public String workingPositions(Model model) {
-		return findPaginatedWorkingPostions(1,"positionName", "asc", model);
+		return findPaginatedWorkingPositions(1,"positionName", "asc", model);
 	}
 
 	@GetMapping("/showNewWorkingPositionForm")
@@ -77,7 +77,6 @@ public class EmployeeController {
 		this.workingPositionService.deleteWorkingPositionById(id);
 		return "redirect:/workingPositions";
 	}
-
 
 	// departments
 	@GetMapping("/departments")
@@ -122,12 +121,14 @@ public class EmployeeController {
 	// employees
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
+		List<WorkingPosition> workingPositions = this.workingPositionService.getAllWorkingPositions();
 		List<Department> departments = this.departmentService.getAllDepartments();
 		// create model attribute to bind form data
 		Employee employee = new Employee();
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("departments", departments);
+		model.addAttribute("workingPositions", workingPositions);
 		return "new_employee";
 	}
 	
@@ -202,7 +203,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/workingPositions/page/{pageNo}")
-	public String findPaginatedWorkingPostions(@PathVariable (value = "pageNo") int pageNo,
+	public String findPaginatedWorkingPositions(@PathVariable (value = "pageNo") int pageNo,
 										   @RequestParam("sortField") String sortField,
 										   @RequestParam("sortDir") String sortDir,
 										   Model model) {

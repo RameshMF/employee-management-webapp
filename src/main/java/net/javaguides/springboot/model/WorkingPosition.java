@@ -13,7 +13,7 @@ public class WorkingPosition {
 
     @Column(name = "position")
     private String positionName;
-    
+
     public long getId() {
         return id;
     }

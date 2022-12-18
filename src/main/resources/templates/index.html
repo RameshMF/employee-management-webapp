@@ -58,6 +58,14 @@
 					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
 							Employee Email</a>
 					</th>
+					<th>
+					<a>
+						Employee Department</a>
+					</th>
+					<th>
+					<a>
+						Employee Working Position</a>
+					</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
@@ -66,6 +74,8 @@
 					<td th:text="${employee.firstName}"></td>
 					<td th:text="${employee.lastName}"></td>
 					<td th:text="${employee.email}"></td>
+					<td th:text="${employee.department.departmentName}"></td>
+					<td th:text="${employee.workingPosition.positionName}"></td>
 					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
 					    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
 					</td>

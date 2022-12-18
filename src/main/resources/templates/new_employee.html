@@ -33,6 +33,13 @@
 				</option>
 			</select>
 
+			<p>Select working position:</p>
+			<select name="EmployeesWorkingPositions" id="EmployeesWorkingPositions" class="form-control mb-4 col-4" th:field="*{workingPosition}">
+				<option th:each="position : ${workingPositions}"
+						th:value="${position.id}"
+						th:text="${position.positionName}">
+				</option>
+			</select>
 
 			<!--<tr  th:each="employee : ${listemployee}">
 				<td th:text="${employee.id}">Employee ID</td>
