@@ -23,6 +23,10 @@ public class Employee {
 	@Column(name = "email")
 	private String email;
 
+	@NotNull
+	@Column(name = "line_manager_email")
+	private String lineManagerEmail;
+
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="working_position")
 	private WorkingPosition workingPosition;
@@ -54,6 +58,15 @@ public class Employee {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLineManagerEmail() {
+		return lineManagerEmail;
+	}
+
+	public void setLineManagerEmail(String lineManagerEmail)
+	{
+		this.lineManagerEmail = lineManagerEmail;
 	}
 
 	public WorkingPosition getWorkingPosition() { return workingPosition; }

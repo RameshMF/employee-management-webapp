@@ -41,6 +41,15 @@
 				</option>
 			</select>
 
+			<p>Select line manager email:</p>
+			<select name="EmployeesLineManagerEmail" id="EmployeesLineManagerEmail" class="form-control mb-4 col-4" th:field="*{lineManagerEmail}">
+				<option th:each="employee : ${listEmployees}"
+						th:value="${employee.email}"
+						th:text="${employee.firstName} + ' ' + ${employee.lastName} + '(' + ${employee.email} + ')'">
+				</option>
+			</select>
+
+
 			<!--<tr  th:each="employee : ${listemployee}">
 				<td th:text="${employee.id}">Employee ID</td>
 				<td th:text="${employee.ename}">Employee Name</td>

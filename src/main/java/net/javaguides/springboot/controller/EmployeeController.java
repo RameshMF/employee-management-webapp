@@ -121,6 +121,7 @@ public class EmployeeController {
 	// employees
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
+		List<Employee> listEmployees = this.employeeService.getAllEmployees();
 		List<WorkingPosition> workingPositions = this.workingPositionService.getAllWorkingPositions();
 		List<Department> departments = this.departmentService.getAllDepartments();
 		// create model attribute to bind form data
@@ -129,6 +130,8 @@ public class EmployeeController {
 		model.addAttribute("employee", employee);
 		model.addAttribute("departments", departments);
 		model.addAttribute("workingPositions", workingPositions);
+		model.addAttribute("listEmployees", listEmployees);
+
 		return "new_employee";
 	}
 	
