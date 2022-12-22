@@ -29,6 +29,7 @@
 				<ul class="nav navbar-nav">
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/departments}">Departments</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/workingPositions}">Working positions</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/employmentContracts}">Employment contracts</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
 				</ul>
 			</div>

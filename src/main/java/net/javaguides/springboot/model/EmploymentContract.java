@@ -14,4 +14,19 @@ public class EmploymentContract {
     @NotNull
     @Column(name = "name")
     private String employmentContractName;
+
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getEmploymentContractName() {
+        return employmentContractName;
+    }
+    public void setEmploymentContractName(String employmentContractName) {
+        this.employmentContractName = employmentContractName;
+    }
+
 }

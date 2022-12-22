@@ -3,8 +3,10 @@ package net.javaguides.springboot.controller;
 import java.util.List;
 
 import net.javaguides.springboot.model.Department;
+import net.javaguides.springboot.model.EmploymentContract;
 import net.javaguides.springboot.model.WorkingPosition;
 import net.javaguides.springboot.service.DepartmentService;
+import net.javaguides.springboot.service.EmploymentContractService;
 import net.javaguides.springboot.service.WorkingPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,12 +33,56 @@ public class EmployeeController {
 	@Autowired
 	private WorkingPositionService workingPositionService;
 
+	@Autowired
+	private EmploymentContractService employmentContractService;
+
 	// display list of all  employees
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
 	}
 
+
+	// employment contracts
+
+	@GetMapping("/employmentContracts")
+	public String employmentContracts(Model model) {
+		return findPaginatedEmploymentContracts(1,"employmentContractName", "asc", model);
+	}
+
+	@GetMapping("/showNewEmploymentContractForm")
+	public String showNewEmploymentContractForm(Model model) {
+		// create model attribute to bind form data
+		EmploymentContract employmentContract = new EmploymentContract();
+		model.addAttribute("employmentContract", employmentContract);
+		return "new_employment_contract";
+	}
+
+	@PostMapping("/saveEmploymentContract")
+	public String saveEmploymentContract(@ModelAttribute("employmentContract") EmploymentContract employmentContract) {
+		// save employment contract to database
+		employmentContractService.saveEmploymentContract(employmentContract);
+		return "redirect:/employmentContracts";
+	}
+
+	@GetMapping("/showFormForUpdateEmploymentContract/{id}")
+	public String showFormForUpdateEmploymentContract(@PathVariable ( value = "id") long id, Model model) {
+
+		// get employment contract from the service
+		EmploymentContract employmentContract = employmentContractService.getEmploymentContractById(id);
+
+		// set employee as a model attribute to pre-populate the form
+		model.addAttribute("employmentContract", employmentContract);
+		return "update_employment_contract";
+	}
+
+	@GetMapping("/deleteEmploymentContract/{id}")
+	public String deleteEmploymentContract(@PathVariable (value = "id") long id) {
+
+		// call delete employment contract method
+		this.employmentContractService.deleteEmploymentContractById(id);
+		return "redirect:/employmentContracts";
+	}
 
 	// working positions
 	@GetMapping("/workingPositions")
@@ -225,5 +271,27 @@ public class EmployeeController {
 
 		model.addAttribute("listWorkingPositions", listWorkingPositions);
 		return "working_positions";
+	}
+
+	@GetMapping("/employmentContracts/page/{pageNo}")
+	public String findPaginatedEmploymentContracts(@PathVariable (value = "pageNo") int pageNo,
+												@RequestParam("sortField") String sortField,
+												@RequestParam("sortDir") String sortDir,
+												Model model) {
+		int pageSize = 5;
+
+		Page<EmploymentContract> page = employmentContractService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<EmploymentContract> listEmploymentContracts = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listEmploymentContracts", listEmploymentContracts);
+		return "employment_contracts";
 	}
 }
