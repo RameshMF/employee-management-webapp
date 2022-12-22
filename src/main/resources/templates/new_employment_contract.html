@@ -17,14 +17,14 @@
 		<form action="#" th:action="@{/saveEmploymentContract}" th:object="${employmentContract}"
 			method="POST">
 			<input type="text" th:field="*{employmentContractName}"
-				placeholder="Employment Contract Name" class="form-control mb-2 col-2">
+				placeholder="Employment Contract Name" class="form-control mb-4 col-4">
 
-				<button type="submit" class="btn btn-info col-2"> Save Employment Contract</button>
+				<button type="submit" class="btn btn-info col-4"> Save Employment Contract</button>
 		</form>
 		
 		<hr>
 		
-		<a th:href = "@{/departments}"> Back to Employment Contracts List</a>
+		<a th:href = "@{/employmentContracts}"> Back to Employment Contracts List</a>
 	</div>
 </body>
 </html>
