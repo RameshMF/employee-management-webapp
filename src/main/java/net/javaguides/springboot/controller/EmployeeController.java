@@ -170,6 +170,7 @@ public class EmployeeController {
 		List<Employee> listEmployees = this.employeeService.getAllEmployees();
 		List<WorkingPosition> workingPositions = this.workingPositionService.getAllWorkingPositions();
 		List<Department> departments = this.departmentService.getAllDepartments();
+		List<EmploymentContract> listEmploymentContracts = this.employmentContractService.getAllEmploymentContracts();
 		// create model attribute to bind form data
 		Employee employee = new Employee();
 
@@ -177,6 +178,7 @@ public class EmployeeController {
 		model.addAttribute("departments", departments);
 		model.addAttribute("workingPositions", workingPositions);
 		model.addAttribute("listEmployees", listEmployees);
+		model.addAttribute("listEmploymentContracts", listEmploymentContracts);
 
 		return "new_employee";
 	}

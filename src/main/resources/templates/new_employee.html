@@ -16,14 +16,22 @@
 
 		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
 			method="POST">
+			<p>Enter employee first name:</p>
 			<input type="text" th:field="*{firstName}"
 				placeholder="Employee First Name" class="form-control mb-4 col-4">
-				
+
+			<p>Enter employee last name:</p>
 			<input type="text" th:field="*{lastName}"
 				placeholder="Employee Last Name" class="form-control mb-4 col-4">
-				
+
+			<p>Enter employee email:</p>
 			<input type="text" th:field="*{email}"
 				placeholder="Employee Email" class="form-control mb-4 col-4">
+
+			<div>
+				<label for="employee-birth-date">Employee date of birth:</label>
+				<input type="date" th:field="${employee.birthdate}" id="employee-birth-date"/>
+			</div>
 
 			<p>Select department:</p>
 			<select name="EmployeesDepartments" id="EmployeesDepartments" class="form-control mb-4 col-4" th:field="*{department}">
@@ -49,21 +57,44 @@
 				</option>
 			</select>
 
+			<p>Select employment contract:</p>
+			<select name="EmploymentContract" id="EmploymentContract" class="form-control mb-4 col-4" th:field="*{EmploymentContract}">
+				<option th:each="employemntContract : ${listEmploymentContracts}"
+						th:value="${employemntContract.id}"
+						th:text="${employemntContract.employmentContractName}">
+				</option>
+			</select>
 
-			<!--<tr  th:each="employee : ${listemployee}">
-				<td th:text="${employee.id}">Employee ID</td>
-				<td th:text="${employee.ename}">Employee Name</td>
-				<td th:text="${employee.mobile}">Mobile</td>
-				<td th:text="${employee.salary}">Salary</td>
-				<td>
-					<a th:href="@{'/edit/' + ${employee.id}}">Edit</a>
-				</td>-->
 
-				<!--
-                                <input type="text" th:field="*{}"
-                                   placeholder="Employee Email" class="form-control mb-4 col-4">
-                -->
+			<div>
+				<label for="employee-contract-start-date">Select employment contract start date:</label>
+				<input type="date" th:field="${employee.employmentContractStart}" id="employee-contract-start-date"/>
+			</div>
 
+			<div>
+				<label for="employee-contract-end-date">Select employment contract end date:</label>
+				<input type="date" th:field="${employee.employmentContractEn}" id="employee-contract-end-date"/>
+			</div>
+
+			<p>Employee address information</p>
+
+			<p>Enter employee country:</p>
+			<input type="text" th:field="*{address.country}"
+				   placeholder="Employee Country" class="form-control mb-4 col-4">
+
+			<p>Enter employee district:</p>
+			<input type="text" th:field="*{address.district}"
+				   placeholder="Employee District" class="form-control mb-4 col-4">
+
+			<p>Enter employee street:</p>
+			<input type="text" th:field="*{address.street}"
+				   placeholder="Employee Street" class="form-control mb-4 col-4">
+
+			<p>Enter employee apartment number:</p>
+			<input type="text" th:field="*{address.apartmentNumber}"
+				   placeholder="Employee Apartment Number" class="form-control mb-4 col-4">
+
+			<p>Employee passport information</p>
 
 			<button type="submit" class="btn btn-info col-2"> Save Employee</button>
 		</form>
