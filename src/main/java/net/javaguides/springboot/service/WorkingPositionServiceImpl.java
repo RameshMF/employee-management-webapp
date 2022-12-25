@@ -13,22 +13,22 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class WorkingPositionServiceImpl implements WorkingPositionService {
+public class WorkingPositionServiceImpl implements ItemStorageService<WorkingPosition> {
     @Autowired
     private WorkingPositionRepository workingPositionRepository;
 
     @Override
-    public List<WorkingPosition> getAllWorkingPositions() {
+    public List<WorkingPosition> getAllItems() {
         return workingPositionRepository.findAll();
     }
 
     @Override
-    public void saveWorkingPosition(WorkingPosition workingPosition) {
+    public void saveItem(WorkingPosition workingPosition) {
         this.workingPositionRepository.save(workingPosition);
     }
 
     @Override
-    public WorkingPosition getWorkingPositionById(long id) {
+    public WorkingPosition getItemById(long id) {
         Optional<WorkingPosition> optional = workingPositionRepository.findById(id);
         WorkingPosition workingPosition = null;
         if (optional.isPresent()) {
@@ -40,7 +40,7 @@ public class WorkingPositionServiceImpl implements WorkingPositionService {
     }
 
     @Override
-    public void deleteWorkingPositionById(long id) {
+    public void deleteItemById(long id) {
         this.workingPositionRepository.deleteById(id);
     }
 

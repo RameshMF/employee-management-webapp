@@ -2,9 +2,7 @@ package net.javaguides.springboot.model;
 
 import com.sun.istack.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "employees")
@@ -25,10 +23,14 @@ public class Employee {
 	@Column(name = "email")
 	private String email;
 
+	@ManyToOne
+	@JoinColumn(name = "type")
+	private EmployeeTypes type;
+
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "birthdate")
-	private Date birthdate;
+	private String birthdate;
 
 	@NotNull
 	@Column(name = "line_manager_email")
@@ -47,12 +49,14 @@ public class Employee {
 	private EmploymentContract employmentContract;
 
 	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "employment_contract_start")
-	private Date employmentContractStart;
+	private String employmentContractStart;
 
 	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "employment_contract_end")
-	private Date employmentContractEnd;
+	private String employmentContractEnd;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="address")
@@ -61,6 +65,10 @@ public class Employee {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="passport")
 	private Passport passport;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="marital_status")
+	private MaritalStatus maritalStatus;
 
 	public long getId() {
 		return id;
@@ -87,6 +95,10 @@ public class Employee {
 		this.email = email;
 	}
 
+	public EmployeeTypes getEmployeeTypes() { return type; }
+
+	public void setEmployeeTypes(EmployeeTypes type) { this.type = type; }
+
 	public String getLineManagerEmail() {
 		return lineManagerEmail;
 	}
@@ -109,15 +121,18 @@ public class Employee {
 	public Address getAddress() { return address; }
 	public void setAddress(Address address) { this.address = address; }
 
-	public Date getBirthdate() { return birthdate; }
-	public void setBirthdate(Date birthdate) { this.birthdate = birthdate; }
+	public String getBirthdate() { return birthdate; }
+	public void setBirthdate(String birthdate) { this.birthdate = birthdate; }
 
-	public Date getEmploymentContractStart() { return employmentContractStart; }
-	public void setEmploymentContractStart(Date employmentContractStart) { this.employmentContractStart = employmentContractStart; }
+	public String getEmploymentContractStart() { return employmentContractStart; }
+	public void setEmploymentContractStart(String employmentContractStart) { this.employmentContractStart = employmentContractStart; }
 
-	public Date getEmploymentContractEnd() { return employmentContractEnd; }
-	public void setEmploymentContractEnd(Date employmentContractEnd) { this.employmentContractEnd = employmentContractEnd; }
+	public String getEmploymentContractEnd() { return employmentContractEnd; }
+	public void setEmploymentContractEnd(String employmentContractEnd) { this.employmentContractEnd = employmentContractEnd; }
 
 	public Passport getPassport() { return passport; }
 	public void setPassport(Passport passport) { this.passport = passport; }
+
+	public MaritalStatus getMaritalStatus() { return maritalStatus; }
+	public void setMaritalStatus(MaritalStatus maritalStatus) { this.maritalStatus = maritalStatus; }
 }

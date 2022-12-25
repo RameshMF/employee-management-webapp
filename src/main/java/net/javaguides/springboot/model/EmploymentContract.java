@@ -28,5 +28,4 @@ public class EmploymentContract {
     public void setEmploymentContractName(String employmentContractName) {
         this.employmentContractName = employmentContractName;
     }
-
 }

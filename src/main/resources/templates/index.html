@@ -30,6 +30,8 @@
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/departments}">Departments</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/workingPositions}">Working positions</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/employmentContracts}">Employment contracts</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/familyMembers}">Family members</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/education}">Education</a></li>
 					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
 				</ul>
 			</div>
@@ -60,12 +62,28 @@
 							Employee Email</a>
 					</th>
 					<th>
-					<a>
-						Employee Department</a>
+						<a>Employee Department</a>
 					</th>
 					<th>
-					<a>
-						Employee Working Position</a>
+						<a>Employee Working Position</a>
+					</th>
+					<th>
+						<a>Employment Contract</a>
+					</th>
+					<th>
+						<a>Employment Contract Start Date</a>
+					</th>
+					<th>
+						<a>Employment Contract End Date</a>
+					</th>
+					<th>
+						<a>Address</a>
+					</th>
+					<th>
+						<a>Passport</a>
+					</th>
+					<th>
+						<a>Marital Status</a>
 					</th>
 					<th> Actions </th>
 				</tr>
@@ -77,6 +95,12 @@
 					<td th:text="${employee.email}"></td>
 					<td th:text="${employee.department.departmentName}"></td>
 					<td th:text="${employee.workingPosition.positionName}"></td>
+					<td th:text="${employee.employmentContract.employmentContractName}"></td>
+					<td th:text="${employee.employmentContractStart}"></td>
+					<td th:text="${employee.employmentContractEnd}"></td>
+					<td th:text="${employee.address.country} + ' ' + ${employee.address.district} + ' ' + ${employee.address.street} + ' ' + ${employee.address.apartmentNumber}"></td>
+					<td th:text="${employee.passport.series} + ' ' + ${employee.passport.number} + ' ' + ${employee.passport.issueDate} + ' ' + ${employee.passport.issuePlace} + ' ' + ${employee.passport.issuePlace}"></td>
+					<td th:text="${employee.maritalStatus.status}"></td>
 					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
 					    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
 					</td>

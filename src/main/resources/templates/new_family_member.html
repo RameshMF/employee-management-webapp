@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Employee Management System</h1>
+		<hr>
+		<h2>Save Family Member</h2>
+
+		<form action="#" th:action="@{/saveFamilyMember}" th:object="${familyMember}"
+			method="POST">
+
+			<p>Select employee:</p>
+			<select name="EmployeeFamilyMember" id="EmployeeFamilyMember" class="form-control mb-4 col-4" th:field="*{employee}">
+				<option th:each="employee : ${listEmployees}"
+						th:value="${employee.id}"
+						th:text="${employee.firstName} + ' ' + ${employee.lastName} + ' (' + ${employee.email} + ')'">
+				</option>
+			</select>
+
+			<p>Enter family member first name:</p>
+			<input type="text" th:field="*{firstName}"
+				placeholder="Family Member First Name" class="form-control mb-4 col-4">
+
+			<p>Enter family member last name:</p>
+			<input type="text" th:field="*{lastName}"
+				placeholder="Family Member Last Name" class="form-control mb-4 col-4">
+
+			<div>
+				<label for="family-member-birth-date">Family member date of birth:</label>
+				<input type="date" th:field="${familyMember.birthdate}" id="family-member-birth-date"/>
+			</div>
+
+			<p>Select family member kinship degree:</p>
+			<select name="FamilyMemberKinshipDegree" id="FamilyMemberKinshipDegree" class="form-control mb-4 col-4" th:field="*{kinshipDegree}">
+				<option th:each="kinshipDegree : ${listKinshipDegree}"
+						th:value="${kinshipDegree.id}"
+						th:text="${kinshipDegree.kinshipDegree}">
+				</option>
+			</select>
+
+			<button type="submit" class="btn btn-info col-2"> Save Family Member</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/familyMembers}"> Back to Family Members List</a>
+	</div>
+</body>
+</html>

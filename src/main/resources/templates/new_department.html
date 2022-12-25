@@ -16,7 +16,7 @@
 
 		<form action="#" th:action="@{/saveDepartment}" th:object="${department}"
 			method="POST">
-			<input type="text" th:field="*{positionName}"
+			<input type="text" th:field="*{departmentName}"
 				placeholder="Department Name" class="form-control mb-2 col-2">
 
 				<button type="submit" class="btn btn-info col-2"> Save Department</button>

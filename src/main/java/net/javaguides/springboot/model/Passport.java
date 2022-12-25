@@ -1,6 +1,7 @@
 package net.javaguides.springboot.model;
 
 import com.sun.istack.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,8 +22,9 @@ public class Passport {
     private String number;
 
     @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "issue_date")
-    private Date issueDate;
+    private String issueDate;
 
     @NotNull
     @Column(name = "issue_place")
@@ -53,10 +55,10 @@ public class Passport {
         this.number = number;
     }
 
-    public Date getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 

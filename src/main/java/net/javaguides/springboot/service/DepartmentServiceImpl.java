@@ -13,22 +13,22 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DepartmentServiceImpl implements DepartmentService {
+public class DepartmentServiceImpl implements ItemStorageService<Department> {
     @Autowired
     private DepartmentRepository departmentRepository;
 
     @Override
-    public List<Department> getAllDepartments() {
+    public List<Department> getAllItems() {
         return departmentRepository.findAll();
     }
 
     @Override
-    public void saveDepartment(Department department) {
+    public void saveItem(Department department) {
         this.departmentRepository.save(department);
     }
 
     @Override
-    public Department getDepartmentById(long id) {
+    public Department getItemById(long id) {
         Optional<Department> optional = departmentRepository.findById(id);
         Department department = null;
         if (optional.isPresent()) {
@@ -40,7 +40,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartmentById(long id) {
+    public void deleteItemById(long id) {
         this.departmentRepository.deleteById(id);
     }
 

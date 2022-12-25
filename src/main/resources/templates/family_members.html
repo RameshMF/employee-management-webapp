@@ -42,25 +42,41 @@
     <br>
 
     <div class="container my-2">
-        <h1>Departments List</h1>
+        <h1>Family Members List</h1>
 
-        <a th:href = "@{/showNewDepartmentForm}" class="btn btn-primary btn-sm mb-3"> Add New Department </a>
+        <a th:href = "@{/showNewFamilyMemberForm}" class="btn btn-primary btn-sm mb-3"> Add New Family Member </a>
 
         <table border="1" class = "table table-striped table-responsive-md">
             <thead>
             <tr>
                 <th>
-                    <a th:href="@{'/departments/page/' + ${currentPage} + '?sortField=departmentName&sortDir=' + ${reverseSortDir}}">
-                        Department Name</a>
+                    <a>Employee</a>
+                </th>
+                <th>
+                    <a th:href="@{'/familyMembers/page/' + ${currentPage} + '?sortField=familyMemberFirstName&sortDir=' + ${reverseSortDir}}">
+                        First Name</a>
+                </th>
+                <th>
+                    <a>Last Name</a>
+                </th>
+                <th>
+                    <a>Birth date</a>
+                </th>
+                <th>
+                    <a>Kinship degree</a>
                 </th>
                 <th> Actions </th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="department : ${listDepartments}">
-                <td th:text="${department.departmentName}"></td>
-                <td> <a th:href="@{/showFormForUpdateDepartment/{id}(id=${department.id})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/deleteDepartment/{id}(id=${department.id})}" class="btn btn-danger">Delete</a>
+            <tr th:each="familyMember : ${listFamilyMembers}">
+                <td th:text="${familyMember.employee.firstName} + ' ' + ${familyMember.employee.lastName} + ' (' + ${familyMember.employee.email} + ')'"></td>
+                <td th:text="${familyMember.firstName}"></td>
+                <td th:text="${familyMember.lastName}"></td>
+                <td th:text="${familyMember.birthdate}"></td>
+                <td th:text="${familyMember.kinshipDegree.kinshipDegree}"></td>
+                <td><!-- <a th:href="@{/showFormForUpdateDepartment/{id}(id=${department.id})}" class="btn btn-primary">Update</a>-->
+                    <a th:href="@{/deleteFamilyMember/{id}(id=${familMember.id})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -73,14 +89,14 @@
                 </div>
                 <div class = "col">
 						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-							<a th:if="${currentPage != i}" th:href="@{'/departments/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+							<a th:if="${currentPage != i}" th:href="@{'/familyMembers/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 							<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 						</span>
 
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/departments/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/familyMembers/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
                         <span th:unless="${currentPage < totalPages}">Next</span>
 
-                        <a th:if="${currentPage < totalPages}" th:href="@{'/departments/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/familyMembers/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
                         <span th:unless="${currentPage < totalPages}">Last</span>
                 </div>
             </div>

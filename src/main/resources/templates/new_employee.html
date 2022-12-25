@@ -33,6 +33,14 @@
 				<input type="date" th:field="${employee.birthdate}" id="employee-birth-date"/>
 			</div>
 
+			<p>Select employee type:</p>
+			<select name="EmployeeTypes" id="EmployeeTypes" class="form-control mb-4 col-4" th:field="*{employeeTypes}">
+				<option th:each="employeeType : ${listEmployeeTypes}"
+						th:value="${employeeType.id}"
+						th:text="${employeeType.type}">
+				</option>
+			</select>
+
 			<p>Select department:</p>
 			<select name="EmployeesDepartments" id="EmployeesDepartments" class="form-control mb-4 col-4" th:field="*{department}">
 				<option th:each="department : ${departments}"
@@ -73,7 +81,7 @@
 
 			<div>
 				<label for="employee-contract-end-date">Select employment contract end date:</label>
-				<input type="date" th:field="${employee.employmentContractEn}" id="employee-contract-end-date"/>
+				<input type="date" th:field="${employee.employmentContractEnd}" id="employee-contract-end-date"/>
 			</div>
 
 			<p>Employee address information</p>
@@ -95,6 +103,35 @@
 				   placeholder="Employee Apartment Number" class="form-control mb-4 col-4">
 
 			<p>Employee passport information</p>
+
+			<p>Enter employee passport series:</p>
+			<input type="text" th:field="*{passport.series}"
+				   placeholder="Passport Series" class="form-control mb-4 col-4">
+
+			<p>Enter employee passport number:</p>
+			<input type="text" th:field="*{passport.number}"
+				   placeholder="Passport Number" class="form-control mb-4 col-4">
+
+			<div>
+				<label for="employee-passport-issue-date">Select passport issue date:</label>
+				<input type="date" th:field="${employee.passport.issueDate}" id="employee-passport-issue-date"/>
+			</div>
+
+			<p>Enter employee passport issue place:</p>
+			<input type="text" th:field="*{passport.issuePlace}"
+				   placeholder="Passport Issue Place" class="form-control mb-4 col-4">
+
+			<p>Enter employee passport registration place:</p>
+			<input type="text" th:field="*{passport.registrationPlace}"
+				   placeholder="Employee Registration Place" class="form-control mb-4 col-4">
+
+			<p>Select employee marital status:</p>
+			<select name="EmployeeMaritalStatus" id="EmployeeMaritalStatus" class="form-control mb-4 col-4" th:field="*{maritalStatus}">
+				<option th:each="maritalStatus : ${listMaritalStatus}"
+						th:value="${maritalStatus.id}"
+						th:text="${maritalStatus.status}">
+				</option>
+			</select>
 
 			<button type="submit" class="btn btn-info col-2"> Save Employee</button>
 		</form>
