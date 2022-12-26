@@ -276,12 +276,25 @@ public class EmployeeController {
 	
 	@GetMapping("/showFormForUpdate/{id}")
 	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
-		
+		List<Employee> listEmployees = this.employeeService.getAllItems();
+		List<WorkingPosition> workingPositions = this.workingPositionService.getAllItems();
+		List<Department> departments = this.departmentService.getAllItems();
+		List<EmploymentContract> listEmploymentContracts = this.employmentContractService.getAllEmploymentContracts();
+		List<MaritalStatus> listMaritalStatus = this.maritalStatusService.getAllMaritalStatus();
+		List<EmployeeTypes> listEmployeeTypes = this.employeeTypesService.getAllEmployeeTypes();
+
 		// get employee from the service
 		Employee employee = employeeService.getItemById(id);
 		
 		// set employee as a model attribute to pre-populate the form
 		model.addAttribute("employee", employee);
+		model.addAttribute("departments", departments);
+		model.addAttribute("workingPositions", workingPositions);
+		model.addAttribute("listEmployees", listEmployees);
+		model.addAttribute("listEmploymentContracts", listEmploymentContracts);
+		model.addAttribute("listMaritalStatus", listMaritalStatus);
+		model.addAttribute("listEmployeeTypes", listEmployeeTypes);
+
 		return "update_employee";
 	}
 	

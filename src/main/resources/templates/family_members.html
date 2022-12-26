@@ -53,7 +53,7 @@
                     <a>Employee</a>
                 </th>
                 <th>
-                    <a th:href="@{'/familyMembers/page/' + ${currentPage} + '?sortField=familyMemberFirstName&sortDir=' + ${reverseSortDir}}">
+                    <a th:href="@{'/familyMembers/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
                         First Name</a>
                 </th>
                 <th>
@@ -76,7 +76,7 @@
                 <td th:text="${familyMember.birthdate}"></td>
                 <td th:text="${familyMember.kinshipDegree.kinshipDegree}"></td>
                 <td><!-- <a th:href="@{/showFormForUpdateDepartment/{id}(id=${department.id})}" class="btn btn-primary">Update</a>-->
-                    <a th:href="@{/deleteFamilyMember/{id}(id=${familMember.id})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/deleteFamilyMember/{id}(id=${familyMember.id})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             </tbody>
