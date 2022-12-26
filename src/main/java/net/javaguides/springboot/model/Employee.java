@@ -36,15 +36,15 @@ public class Employee {
 	@Column(name = "line_manager_email")
 	private String lineManagerEmail;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="working_position")
 	private WorkingPosition workingPosition;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="department")
 	private Department department;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="employment_contract")
 	private EmploymentContract employmentContract;
 
@@ -66,7 +66,7 @@ public class Employee {
 	@JoinColumn(name="passport")
 	private Passport passport;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="marital_status")
 	private MaritalStatus maritalStatus;
 
