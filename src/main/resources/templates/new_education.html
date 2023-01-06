@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Employee Management System</h1>
+		<hr>
+		<h2>Save Education</h2>
+
+		<form action="#" th:action="@{/saveEducation}" th:object="${education}"
+			method="POST">
+
+			<p>Select employee:</p>
+			<select name="EmployeeFamilyMember" id="EmployeeFamilyMember" class="form-control mb-4 col-4" th:field="*{employee}">
+				<option th:each="employee : ${listEmployees}"
+						th:value="${employee.id}"
+						th:text="${employee.firstName} + ' ' + ${employee.lastName} + ' (' + ${employee.email} + ')'">
+				</option>
+			</select>
+
+			<p>Educational Institution Name:</p>
+			<input type="text" th:field="*{educationalInstitution}"
+				placeholder="Educational Institution Name" class="form-control mb-2 col-2">
+
+			<p>Diploma Qualification:</p>
+			<input type="text" th:field="*{diplomaQualification}"
+				   placeholder="Diploma Qualification" class="form-control mb-2 col-2">
+
+			<p>Diploma Specialty:</p>
+			<input type="text" th:field="*{diplomaSpecialty}"
+				   placeholder="Diploma Specialty" class="form-control mb-2 col-2">
+
+			<p>Education type:</p>
+			<input type="text" th:field="*{educationType}"
+				   placeholder="Education type" class="form-control mb-2 col-2">
+
+			<div>
+				<label for="education-start-date">Select education start date:</label>
+				<input type="date" th:field="${education.startDate}" id="education-start-date"/>
+			</div>
+
+			<div>
+				<label for="education-end-date">Select education end date:</label>
+				<input type="date" th:field="${education.endDate}" id="education-end-date"/>
+			</div>
+
+			<p>Select form of study:</p>
+			<select name="EducationFormOfStudy" id="EducationFormOfStudy" class="form-control mb-4 col-4" th:field="*{formOfStudy}">
+				<option th:each="formOfStudy : ${listFormsOfStudy}"
+						th:value="${formOfStudy.id}"
+						th:text="${formOfStudy.studyFormName}">
+				</option>
+			</select>
+
+			<button type="submit" class="btn btn-info col-2"> Save Education</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/education}"> Back to Education List</a>
+	</div>
+</body>
+</html>

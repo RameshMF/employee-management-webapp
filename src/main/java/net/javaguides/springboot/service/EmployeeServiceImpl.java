@@ -14,23 +14,23 @@ import net.javaguides.springboot.model.Employee;
 import net.javaguides.springboot.repository.EmployeeRepository;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements ItemStorageService<Employee> {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
 	@Override
-	public List<Employee> getAllEmployees() {
+	public List<Employee> getAllItems() {
 		return employeeRepository.findAll();
 	}
 
 	@Override
-	public void saveEmployee(Employee employee) {
+	public void saveItem(Employee employee) {
 		this.employeeRepository.save(employee);
 	}
 
 	@Override
-	public Employee getEmployeeById(long id) {
+	public Employee getItemById(long id) {
 		Optional<Employee> optional = employeeRepository.findById(id);
 		Employee employee = null;
 		if (optional.isPresent()) {
@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void deleteEmployeeById(long id) {
+	public void deleteItemById(long id) {
 		this.employeeRepository.deleteById(id);
 	}
 
