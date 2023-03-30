@@ -22,10 +22,13 @@
 				<input type="text" th:field="*{lastName}"
 				placeholder="Employee Last Name" class="form-control mb-4 col-4">
 				
-				<input type="text" th:field="*{email}"
+				<input type="email" th:field="*{email}"
 				placeholder="Employee Email" class="form-control mb-4 col-4">
 				
-				<button type="submit" class="btn btn-info col-2"> Save Employee</button>
+				<input type="phone" th:field="*{phone}"
+				placeholder="Employee Phone" class="form-control mb-4 col-4">
+
+                                <button type="submit" class="btn btn-info col-2"> Save Employee</button>
 		</form>
 		
 		<hr>
